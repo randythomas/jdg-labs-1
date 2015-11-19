@@ -4,11 +4,13 @@ AUTHORS="Thomas Qvarnstrom, Red Hat <tqvarnst@redhat.com>"
 SRC_DIR=./installs
 JBDS=jbdevstudio-product-universal-7.1.1.GA-v20140314-2145-B688.jar
 MVN_REPO=./target/local_mvn_repos
-REPOS=(jboss-eap-6.3.0-maven-repository.zip jboss-datagrid-6.3.0-maven-repository.zip)
-EAP_MVN_REPO=jboss-eap-6.3.0-maven-repository.zip
-JDG_SERVER=jboss-datagrid-6.3.0-server.zip
-JDG_MVN_REPO=jboss-datagrid-6.3.0-maven-repository.zip
+REPOS=(jboss-eap-6.4.0-maven-repository.zip jboss-datagrid-6.5.1-maven-repository.zip)
+EAP_MVN_REPO=jboss-eap-6.4.0-maven-repository.zip
+JDG_SERVER=jboss-datagrid-6.5.1-server.zip
+JDG_MVN_REPO=jboss-datagrid-6.5.1-maven-repository.zip
 
+JDG_MVN_REPO_NAME=$(echo ${JDG_MVN_REPO%.*})
+EAP_MVN_REPO_NAME=$(echo ${EAP_MVN_REPO%.*})
 
 # wipe screen.
 clear 
@@ -96,11 +98,11 @@ echo "Generating settings.xml from the current location"
 echo "  - either copy this to ~/.m2/ or use with mvn -s <path to settingsfile>"
 cp example-settings.xml target/settings.xml
 
-pushd $MVN_REPO/jboss-datagrid-6.3.0-maven-repository > /dev/null
+pushd $MVN_REPO/$JDG_MVN_REPO_NAME > /dev/null
 jdg_mvn_repo_path=`pwd`
 popd > /dev/null
 
-pushd $MVN_REPO/jboss-eap-6.3.0.GA-maven-repository > /dev/null
+pushd $MVN_REPO/$EAP_MVN_REPO_NAME > /dev/null
 eap63_mvn_repo_path=`pwd`
 popd > /dev/null
 
