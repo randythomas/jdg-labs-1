@@ -1,18 +1,18 @@
 #!/bin/bash 
 DEMO="JDG Workshop Labs - Server environment"
 AUTHORS="Thomas Qvarnstrom, Red Hat, @tqvarnst"
-JBOSS_HOME=./target/jboss-eap-6.3
-JDG_HOME=./target/jboss-datagrid-6.3.0-server
-JDG_ONE_HOME=./target/jboss-datagrid-6.3.0-server-one
-JDG_TWO_HOME=./target/jboss-datagrid-6.3.0-server-two
+JBOSS_HOME=./target/jboss-eap-6.4
+JDG_HOME=./target/jboss-datagrid-6.5.1-server
+JDG_ONE_HOME=./target/jboss-datagrid-6.5.1-server-one
+JDG_TWO_HOME=./target/jboss-datagrid-6.5.1-server-two
 SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF=$JBOSS_HOME/standalone/configuration/
 SRC_DIR=./installs
-EAP_SERVER=jboss-eap-6.3.0.zip
+EAP_SERVER=jboss-eap-6.4.0.zip
 EAP_SERVER_MD5SUM=
-JDG_SERVER=jboss-datagrid-6.3.0-server.zip
-JDG_LIBRARY_MODUELS=jboss-datagrid-6.3.0-eap-modules-library.zip
-HOTROD_MODULES=jboss-datagrid-6.3.0-eap-modules-hotrod-java-client.zip
+JDG_SERVER=jboss-datagrid-6.5.1-server.zip
+JDG_LIBRARY_MODUELS=jboss-datagrid-6.5.1-eap-modules-library.zip
+HOTROD_MODULES=jboss-datagrid-6.5.1-eap-modules-remote-java-client.zip
 
 
 function print_header() {
@@ -95,14 +95,14 @@ function setup_eap_with_modules() {
 	echo "Adding JBoss Data Grid Modules to EAP"
 	tmpdir=`mktemp -d XXXXXXXX`
 	unzip -q -d ${tmpdir} ${SRC_DIR}/${JDG_LIBRARY_MODUELS}
-	cp -R ${tmpdir}/jboss-datagrid-6.3.0-eap-modules-library/modules/* $JBOSS_HOME/modules/
+	cp -R ${tmpdir}/jboss-datagrid-6.5.1-eap-modules-library/modules/* $JBOSS_HOME/modules/
 	rm -rf  ${tmpdir} 
 
 	# Adding Hotrod modules to EAP
 	#echo "Adding Hotrod Modules to EAP"
 	#tmpdir=`mktemp -d XXXXXXXX`
 	#unzip -q -d ${tmpdir} ${SRC_DIR}/${HOTROD_MODULES}
-	#cp -R ${tmpdir}/jboss-datagrid-6.3.0-eap-modules-hotrod-java-client/modules/* $JBOSS_HOME/modules/
+	#cp -R ${tmpdir}/jboss-datagrid-6.5.1-eap-modules-hotrod-java-client/modules/* $JBOSS_HOME/modules/
 	#rm -rf  ${tmpdir}  
 	
 	echo "Done setting up EAP with modules"	
@@ -113,7 +113,7 @@ function setup_eap_node_with_modules() {
 
 	ORG_JBOSS_HOME=$JBOSS_HOME
 	
-	JBOSS_HOME=./target/${NODE_NAME}/jboss-eap-6.3
+	JBOSS_HOME=./target/${NODE_NAME}/jboss-eap-6.4
 	
 	setup_eap_with_modules
 	
